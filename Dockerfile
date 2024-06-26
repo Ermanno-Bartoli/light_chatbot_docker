@@ -1,3 +1,6 @@
+FROM ollama/ollama:latest
+
+
 FROM ubuntu:22.04
 
 # Arguments for the user of the container - these options have to be passed when building the image
@@ -5,8 +8,8 @@ ARG USERNAME
 ARG USERID
 ARG GROUPID
 
-# Set environment variable
-ENV DEBIAN_FRONTEND=noninteractive
+# Configure NVIDIA things
+ENV NVIDIA_DRIVER_CAPABILITIES=all
 
 # Install necessary packages
 RUN apt-get update && apt-get install -y \
@@ -24,7 +27,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 RUN apt-get update && apt-get install -y \
     nano \
-    git
+    git \
+    sudo
 
 # Install necessary python packages
 RUN pip install --upgrade pip
@@ -32,7 +36,11 @@ RUN pip install \
     gpt4all \
     flask
 
-    ## Setup the users
+# Installing Ollama
+RUN curl -fsSL https://ollama.com/install.sh | sh
+RUN pip install ollama
+
+## Setup the users
 
 # Properly setup the root password so that we have control to log in
 RUN echo "root:root" | chpasswd
@@ -53,3 +61,4 @@ WORKDIR "/home/$USERNAME"
 RUN mkdir -p light_chatbot
 
 WORKDIR "/home/$USERNAME/light_chatbot"
+
