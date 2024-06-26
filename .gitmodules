@@ -1,0 +1,3 @@
+[submodule "light_chatbot"]
+	path = light_chatbot
+	url = https://github.com/Ermanno-Bartoli/light_chatbot.git
