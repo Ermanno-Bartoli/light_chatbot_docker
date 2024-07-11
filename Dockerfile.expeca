@@ -31,7 +31,8 @@ RUN apt-get update && apt-get install -y \
 RUN pip install --upgrade pip
 RUN pip install \
     gpt4all \
-    flask
+    flask \
+    openai
 
 # Installing Ollama
 RUN curl -fsSL https://ollama.com/install.sh | sh
