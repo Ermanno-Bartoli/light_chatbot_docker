@@ -40,7 +40,7 @@ RUN pip install \
 
 # Installing Ollama
 RUN curl -fsSL https://ollama.com/install.sh | sh
-RUN pip install ollama
+RUN pip install --upgrade ollama
 
 ## Setup the users
 # Properly setup the root password so that we have control to log in
